@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Registration</title>
+</h:head>
+
+<h:body>
+	<h:form id="myform">
+		<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+			<h:outputLabel value="Email :" />
+			<p:inputText id="email" value="#{controller.person.emailAddress}" />
+			<h:outputLabel value=" " />
+			<h:outputLabel value="Password : " />
+			<p:password id="pass" value="#{controller.person.password}"
+				feedback="true" />
+			<h:outputLabel value=" " />
+			<h:outputLabel value="firstName : " />
+			<p:inputText id="fn" value="#{controller.person.firstName}" />
+			<h:outputLabel value=" " />
+			<h:outputLabel value="lastName : " />
+			<p:inputText id="ln" value="#{controller.person.lastName}" />
+			<h:outputLabel value=" " />
+			<h:outputLabel for="age" value="Age :" />
+			<p:spinner id="age" value="#{controller.person.age}" min="18"
+				max="90" />
+			<h:outputLabel value=" " />
+			<h:outputLabel value="Language :" />
+			<p:selectOneMenu id="lang" value="#{controller.person.language}">
+				<f:selectItem itemLabel="fr" itemValue="francais" />
+				<f:selectItem itemLabel="nl" itemValue="neerlandais" />
+				<f:selectItem itemLabel="en" itemValue="anglais" />
+			</p:selectOneMenu>
+			<h:outputLabel value=" " />
+			<h:outputLabel value="Company name :" />
+			<p:inputText id="name" value="#{controller.person.company.name}" />
+			<h:outputLabel value=" " />
+			
+			<h:outputLabel value="vatNr :" />
+			<p:inputText id="vatNr" value="#{controller.person.company.vatNr}">
+				<f:converter converterId="vatNumberConverter" />
+				<f:validator validatorId="vatNumberValidator" />
+				
+			</p:inputText>
+			<p:message for="vatNr" style="color:red" />
+
+			<h:outputLabel value="telephone :" />
+			<p:inputText id="tel"
+				value="#{controller.person.company.telephoneNumber}" />
+			<h:outputLabel value=" " />
+
+			<h:outputLabel value="street :" />
+			<p:inputText id="street"
+				value="#{controller.person.company.address.street}" />
+			<h:outputLabel value=" " />
+
+			<h:outputLabel value="nr :" />
+			<p:inputText id="nr" value="#{controller.person.company.address.nr}" />
+			<h:outputLabel value=" " />
+			<h:outputLabel value="zipcode :" />
+			<p:inputText id="zipcode"
+				value="#{controller.person.company.address.zipcode}" />
+			<h:outputLabel value=" " />
+			
+			<h:outputLabel value="town :" />
+			<p:inputText id="town"
+				value="#{controller.person.company.address.town} " required="true" requiredMessage = "can not be blank " validatorMessage = "longueur pas valide">
+				<f:validateLength minimum="1" maximum="35" />
+				</p:inputText>
+			<p:message for="town" style="color:red" />
+			
+			<p:commandButton value="Valider" action="#{controller.register}"
+				ajax="false" />
+			<p:link value="vous avez deja un compte ? login" outcome="login" />
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
